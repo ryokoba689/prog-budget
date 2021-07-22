@@ -1,28 +1,7 @@
-let db;
-const request = indexedDB.open("budget", 1);
-console.log("TestData")
-request.onupgradeneeded = ({
-	target
-}) => {
-	const db = target.result;
-	db.createObjectStore("pending", {
-		autoIncrement: true
-	});
-};
-request.onsuccess = ({
-	target
-}) => {
-	console.log("Test Susccessful    ${target.errorCode}  ")
-	db = target.result;
-	// checks if the application is online
-	if (navigator.onLine) {
-		checkData();
-	} else {
-		// If offline console logs
-		console.log("Lost connection");
-		checkData();
-	}
-};
+let db;const request=indexedDB.open("budget",1);console.log("TestData")
+request.onupgradeneeded=({target})=>{const db=target.result;db.createObjectStore("pending",{autoIncrement:!0})}
+request.onsuccess=({target})=>{console.log("Test Susccessful    ${target.errorCode}  ")
+db=target.result;if(navigator.onLine){checkData()}else{console.log("Lost connection");checkData()}}
 request.onerror=function(event){console.log("Request Unsuccessful "+event.target.errorCode);};
 
 function saveRecord(record){console.log("Saved record") 
